@@ -1,5 +1,3 @@
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-import com.sun.org.apache.xerces.internal.impl.xs.identity.Selector;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,12 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidSelectorException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -40,33 +34,41 @@ public class firstJoomTest {
 
     @Test
     public void basicTest() {
+        //Ожидание загрузки
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //Закрываем первую всплывающую рекламу
         driver.findElement(new By.ByXPath("//android.widget.ImageView[@content-desc=\"Close\"]")).click();
-
+        //Закрываем вторую возможную рекламу (?)
         //driver.findElement(new By.ByXPath("//android.widget.ImageView[@content-desc=\"Close\"]")).click();
+        //Закрываем предложение на стартовом экране
         driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.view.ViewGroup")).click();
+        //Переход в профиль
         driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[5]")).click();
+        //Ожидание загрузки
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //Переход в настройки
         driver.findElement(new By.ByXPath("//android.widget.ImageView[@content-desc=\"Settings\"]")).click();
+        //Ожидание загрузки
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //Выбор пункта с валютой
         driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[3]")).click();
+        //Ожидание загрузки
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //Свайп снизу вверх 5 раз
         try {
             driver.findElement(MobileBy.AndroidUIAutomator(
                     "new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(5)"));
         } catch (InvalidSelectorException e) {
             // ignore
         }
-        driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.TextView[9]")).click();
+        //Выбор US dollar
+        driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.TextView[9]")).click();5
+        //Ожидание загрузки
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        //2 клика выход в профиль и главное меню
         driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageView")).click();
         driver.findElement(new By.ByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageView[1]")).click();
 
-    }
-
-    @AfterMethod
-    public void teardown() {
-        //driver.quit();
     }
 
 }
